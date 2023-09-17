@@ -39,6 +39,7 @@
 
 .app-body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   padding-left: 20%;
   padding-right: 20%;
