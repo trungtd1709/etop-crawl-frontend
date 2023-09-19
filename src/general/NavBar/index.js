@@ -40,12 +40,12 @@ function NavBar(props) {
       >
         Screenshot match
       </Menu.Item>
-      <Menu.Item key="projects" icon={<AppstoreAddOutlined />}>
+      {/* <Menu.Item key="projects" icon={<AppstoreAddOutlined />}>
         Projects
       </Menu.Item>
       <Menu.Item key="settings" icon={<SettingOutlined />}>
         Settings
-      </Menu.Item>
+      </Menu.Item> */}
     </Menu>
   );
 }

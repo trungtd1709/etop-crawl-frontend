@@ -1,16 +1,33 @@
 import { Input } from "antd";
-import crawlApi from "../../api/crawlApi";
-import { useState } from "react";
+import axios from "axios";
+import { useMemo, useState } from "react";
 
 const ScreenshotMatch = () => {
   const [matchUrl, setMatchUrl] = useState("");
+  const [imgUrlArray, setImgUrlArray] = useState([]);
   const getData = async () => {
     try {
-      const res = await crawlApi.getData(matchUrl);
+      const params = {
+        url: "matchUrl",
+      };
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/something`,
+        params
+      );
+      if (res?.status) {
+        setImgUrlArray([...imgUrlArray, res.data]);
+      }
+      console.log(res);
     } catch (err) {
       console.log(err);
     }
   };
+
+  const imgList = useMemo(() => {
+    return imgUrlArray.map(() => (
+      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png"></img>
+    ));
+  }, [imgUrlArray]);
 
   return (
     <div className="app-body" style={{ marginTop: "100px", gap: "15px" }}>
@@ -22,15 +39,17 @@ const ScreenshotMatch = () => {
           }}
           placeholder="Input match URL here"
         />
-        <button className="btn btn-primary" onClick={getData}>
+        <div
+          className="btn btn-primary"
+          onClick={(e) => {
+            e.preventDefault();
+            getData();
+          }}
+        >
           Submit
-        </button>
+        </div>
       </div>
-      <img
-        className=""
-        style={{ width: "80%" }}
-        src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png"
-      ></img>
+      <div>{imgList}</div>
     </div>
   );
 };

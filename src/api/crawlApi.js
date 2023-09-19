@@ -3,7 +3,7 @@ import axiosClient from "./axiosClient";
 const crawlApi = {
   getData: (params) => {
     const url = "/sign-in";
-    return axiosClient.post("/invoice/list-all");
+    return axiosClient.get("/invoice/list-all");
   },
   
   //   logOut: (params) => {

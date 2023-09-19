@@ -28,6 +28,7 @@ axiosClient.interceptors.response.use(
     if (response && response.data) {
       return response.data;
     }
+    debugger
 
     return response;
   },
